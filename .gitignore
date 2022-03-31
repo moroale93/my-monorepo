@@ -1,0 +1,4 @@
+node_modules
+dist
+.jest-cache
+test-results
