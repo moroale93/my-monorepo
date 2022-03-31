@@ -1,0 +1,82 @@
+name: Common steps
+
+on:
+  workflow_call:
+
+jobs:
+  preparation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Install dependencies
+        if: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }} != 'true'
+        run: yarn install
+
+  build:
+    needs: preparation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Check for changed packages
+        run: CHANGED_PACKAGES=$(yarn --silent changed | paste -sd, -)
+      - name: Link changed packages
+        run: yarn bin lerna version minor --yes --no-git-tag-version --no-push
+      - name: Build changed packages
+        run: 'test -z "$CHANGED_PACKAGES" || yarn build --scope="{,$CHANGED_PACKAGES}" --include-dependencies'
+      - name: Build all packages if main branch
+        run: 'test "$GITHUB_REF" = "main" || yarn build'
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-builds
+          path: |
+            packages/*/package.json
+            packages/*/dist
+    
+  lint:
+    needs: preparation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - run: yarn lint
+    
+  test:
+    needs: preparation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Run test
+        run: yarn test:ci
