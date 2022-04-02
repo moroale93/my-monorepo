@@ -1,0 +1,43 @@
+{
+  "name": "example-my-isolated-application",
+  "version": "0.1.0",
+  "private": "true",
+  "description": "This is a generated package",
+  "keywords": [],
+  "author": "Alessandro Moretto <moro.ale.93@gmail.com>",
+  "license": "UNLICENSED",
+  "main": "dist",
+  "documentationDir": "dist",
+  "module": "dist/example-my-isolated-application.module.js",
+  "directories": {
+    "lib": "dist",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "echo no tests here",
+    "build": "yarn clean && run-p build:*",
+    "build:app": "webpack --config ./config/webpack/webpack.config.prod.js --mode production",
+    "start": "webpack serve --config ./config/webpack/webpack.config.dev.js",
+    "deploy": "wrangler publish --config wrangler.toml --verbose --env",
+    "clean": "rm -rf ./dist",
+    "test:ci": "echo no tests here"
+  },
+  "kind": "react-app",
+  "dependencies": {
+    "react-iframes-syncher": "^0.1.0"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "ts-loader": "^9.2.6",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.2"
+  }
+}

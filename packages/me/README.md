@@ -12,5 +12,5 @@ import me from 'me';
 
 ## Application links
 
-- [Staging app](https://mestaging.amoretto.it)
-- [Production app](https://me.amoretto.it)
+- [Staging app](https://mestaging.alemoretto.it)
+- [Production app](https://me.alemoretto.it)
