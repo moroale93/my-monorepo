@@ -1,0 +1,51 @@
+{
+  "name": "puzzle",
+  "version": "1.0.0",
+  "private": true,
+  "description": "This is a generated package",
+  "keywords": [],
+  "author": "Alessandro Moretto <moro.ale.93@gmail.com>",
+  "license": "UNLICENSED",
+  "main": "dist",
+  "module": "dist/puzzle.module.js",
+  "directories": {
+    "lib": "dist",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moroale93/my-monorepo.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "yarn clean && run-p build:*",
+    "build:app": "webpack --config ./config/webpack/webpack.config.prod.js --mode production",
+    "deploy": "wrangler publish --config wrangler.toml --env",
+    "start": "webpack serve --config ./config/webpack/webpack.config.dev.js",
+    "clean": "rm -rf ./dist",
+    "test:ci": "jest --coverage --ci"
+  },
+  "bugs": {
+    "url": "https://github.com/moroale93/my-monorepo/issues"
+  },
+  "homepage": "https://github.com/moroale93/my-monorepo#readme",
+  "kind": "react-app",
+  "dependencies": {
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "@mui/material": "^5.0.2",
+    "@mui/system": "^5.0.2"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "ts-loader": "^9.2.6",
+    "ts-jest": "^27.1.4",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.2"
+  }
+}
