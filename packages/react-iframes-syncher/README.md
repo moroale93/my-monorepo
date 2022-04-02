@@ -58,4 +58,4 @@ export default function InputIsolatedApp() {
 
 ## Demo
 
-You can find and example of an isolated app in the [demo here](https://isolation.alemoretto.dev.github.com).
+You can find and example of an isolated app in the [demo here](https://examplemyapplication.alemoretto.it/).

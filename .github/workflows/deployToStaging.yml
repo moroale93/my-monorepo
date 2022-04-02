@@ -14,7 +14,8 @@ jobs:
     needs: [ common ]
     runs-on: ubuntu-latest
     environment: cicd
-
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -27,6 +28,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: code-builds
+          path: ./packages
       - name: Setup git email config
         run: git config --global user.email "$GIT_PUBLISHER_EMAIL"
         env:
@@ -34,9 +36,9 @@ jobs:
       - name: Setup git name config
         run: git config --global user.name "Automated Publisher"
       - name: Setup npm registry
-        run: echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
+        run: echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> .npmrc
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Setup npm configs
         run: echo "unsafe-perm=true" >> .npmrc
       - name: Skip npmrc changes
@@ -45,6 +47,8 @@ jobs:
         run: yarn lerna version
       - name: Publish versions
         run: yarn lerna publish from-package
+        env:
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   deploy-application-to-staging:
     needs: [ common ]
