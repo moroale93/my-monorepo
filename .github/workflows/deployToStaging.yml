@@ -27,7 +27,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: code-builds
-          path: ./packages
       - name: Setup git email config
         run: git config --global user.email "$GIT_PUBLISHER_EMAIL"
         env:

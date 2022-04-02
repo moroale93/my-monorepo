@@ -1,12 +1,11 @@
 {
   "name": "react-iframes-syncher",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "This library allows you to perfectly isolate a part of your react app",
   "keywords": [],
   "author": "Alessandro Moretto <moro.ale.93@gmail.com>",
   "license": "UNLICENSED",
   "main": "dist",
-  "module": "dist/react-iframes-syncher.module.js",
   "directories": {
     "lib": "dist",
     "test": "__tests__"
