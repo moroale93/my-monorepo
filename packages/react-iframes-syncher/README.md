@@ -1,3 +1,4 @@
+[![NPM version](http://img.shields.io/npm/v/react-iframes-syncher.svg)](https://www.npmjs.org/package/react-iframes-syncher)
 # `react-iframes-syncher`
 
 Iframes are perfect to fully isolate a component from the rest of the page.

@@ -1,15 +1,6 @@
 # `puzzle`
 
-> This is a generated package
-
-## Usage
-
-```
-import puzzle from 'puzzle';
-
-// TODO: DEMONSTRATE API
-```
-
+This contains my implemantion of the puzzle game.
 ## Application links
 
 - [Staging app](https://puzzlestaging.alemoretto.it)
