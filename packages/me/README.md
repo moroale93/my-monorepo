@@ -1,14 +1,6 @@
 # `me`
 
-> This is a generated package
-
-## Usage
-
-```
-import me from 'me';
-
-// TODO: DEMONSTRATE API
-```
+This is my personal website implementation.
 
 ## Application links
 
